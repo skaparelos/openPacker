@@ -1,6 +1,5 @@
 # openPacker
 A simplified open source version of Texture Packer.
-
 It is used to combine many images into a single one so that the combined image does not have much empty space.
 
 For more on the problem: see [the packing problems](https://en.wikipedia.org/wiki/Packing_problems), [the Bin Packing Problem (wikipedia)](https://en.wikipedia.org/wiki/Bin_packing_problem), [this paper](http://www.aaai.org/Papers/ICAPS/2003/ICAPS03-029.pdf), or [this article](https://www.codeproject.com/Articles/210979/Fast-optimizing-rectangle-packing-algorithm-for-bu#basic).
