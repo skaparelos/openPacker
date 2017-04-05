@@ -14,7 +14,7 @@ The output is two things:
 python openPacker.py imgs/green.png imgs/dirt_green.png imgs/dirt.png imgs/cinema.png imgs/house_blue.png imgs/house_green.png imgs/house_red.png imgs/tilenew.png imgs/tree.png
 
 1) Image:
-
+![alt tag](link)
 
 2) JSON:
 '''
