@@ -1,0 +1,83 @@
+[
+    {
+        "frame": {
+            "y": 0, 
+            "x": 0, 
+            "w": 256, 
+            "h": 200
+        }, 
+        "filename": "imgs/cinema.png"
+    }, 
+    {
+        "frame": {
+            "y": 0, 
+            "x": 256, 
+            "w": 128, 
+            "h": 110
+        }, 
+        "filename": "imgs/house_blue.png"
+    }, 
+    {
+        "frame": {
+            "y": 0, 
+            "x": 384, 
+            "w": 128, 
+            "h": 110
+        }, 
+        "filename": "imgs/house_green.png"
+    }, 
+    {
+        "frame": {
+            "y": 0, 
+            "x": 512, 
+            "w": 128, 
+            "h": 110
+        }, 
+        "filename": "imgs/house_red.png"
+    }, 
+    {
+        "frame": {
+            "y": 0, 
+            "x": 640, 
+            "w": 128, 
+            "h": 110
+        }, 
+        "filename": "imgs/tree.png"
+    }, 
+    {
+        "frame": {
+            "y": 110, 
+            "x": 256, 
+            "w": 128, 
+            "h": 64
+        }, 
+        "filename": "imgs/green.png"
+    }, 
+    {
+        "frame": {
+            "y": 110, 
+            "x": 384, 
+            "w": 128, 
+            "h": 64
+        }, 
+        "filename": "imgs/dirt_green.png"
+    }, 
+    {
+        "frame": {
+            "y": 110, 
+            "x": 512, 
+            "w": 128, 
+            "h": 64
+        }, 
+        "filename": "imgs/dirt.png"
+    }, 
+    {
+        "frame": {
+            "y": 110, 
+            "x": 640, 
+            "w": 128, 
+            "h": 64
+        }, 
+        "filename": "imgs/tilenew.png"
+    }
+]
