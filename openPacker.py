@@ -110,7 +110,7 @@ def generateAtlas(imageData):
 				p.valid = False
 				placed = True
 				curHeight = max(curHeight, im.getY() + im.getHeight())
-				newPoint = Point(im.getX(), im.getY() + im.getHeight())
+				newPoint = Point(im.getX() + im.getWidth(), im.getY())
 				if ( not(newPoint in pointsToCheck) ):
 					pointsToCheck.append(newPoint)
 				break # break is important as the exactly above line adds more points so we get into an infinite loop
