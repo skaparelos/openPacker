@@ -54,6 +54,7 @@ class Point():
 	def __str__(self):
 		return "("+str(self.x)+","+str(self.y)+") " + ("valid" if self.valid else "invalid")
 
+
 def loadImages(names):
 
 	images = []
@@ -69,10 +70,16 @@ def loadImages(names):
 	return (images, totalWidth, maxHeight)
 
 
+def taken(x,y,w,h, images):
+	for im in images:
+		if (x in range(im.getX(), im.getX() + im.getWidth()) or im.getX() in range( x, x + w )) and (y in range(im.getY(), im.getY() + im.getHeight()) or im.getY() in range(y, y + h)):
+			return True
+	return False
+
 def generateAtlas(imageData):
 
 	images = imageData[0]
-	images.sort(key=lambda x: x.getHeight(), reverse=True)
+	images.sort(key=lambda x: x.getHeight() * x.getWidth(), reverse=True)
 	images[0].setX(0)
 	images[0].setY(0)
 
@@ -85,6 +92,8 @@ def generateAtlas(imageData):
 	curHeight = maxHeight
 	pointsToCheck = []
 
+	placedImages = []
+
 	for im in images[1:]:
 
 		placed = False
@@ -93,6 +102,12 @@ def generateAtlas(imageData):
 			x = p.x
 			y = p.y
 			stillValid = p.valid
+
+			# the space can and sometimes will be taken due a variety of
+			# different sized objects being next to each other,
+			# so check if we can fit in the spcae and move on if so.
+			if taken( x, y, im.getWidth(), im.getHeight(), placedImages):
+				continue
 
 			if (stillValid and (y + im.getHeight() < curHeight)):
 				im.setX(x)
@@ -124,6 +139,8 @@ def generateAtlas(imageData):
 			    pointsToCheck.append(newPoint)
 			x_offset += im.getWidth()
 			curWidth += im.getWidth()
+
+		placedImages.append(im)
 
 
 
