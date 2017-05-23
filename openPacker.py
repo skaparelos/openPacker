@@ -23,7 +23,7 @@ class ImageData():
 
 	def getY(self):
 		return self._y
-		
+
 	def getName(self):
 		return self._name
 
@@ -39,6 +39,20 @@ class ImageData():
 	def getArea(self):
 		return self._area
 
+class Point():
+	def __init__ (self, x, y, valid=True):
+		self.x = x
+		self.y = y
+		self. valid = valid
+
+	def __eq__(self, other):
+		return self.x == other.x and self.y == other.y
+
+	def __hash__(self):
+		return hash((self.x, self.y))
+
+	def __str__(self):
+		return "("+str(self.x)+","+str(self.y)+") " + ("valid" if self.valid else "invalid")
 
 def loadImages(names):
 
@@ -72,36 +86,42 @@ def generateAtlas(imageData):
 	pointsToCheck = []
 
 	for im in images[1:]:
-		
+
 		placed = False
 
 		for p in pointsToCheck:
-			x = p[0]
-			y = p[1]
-			stillValid = p[2]
+			x = p.x
+			y = p.y
+			stillValid = p.valid
 
-			if (stillValid and (y + im.getHeight() < maxHeight)):
+			if (stillValid and (y + im.getHeight() < curHeight)):
 				im.setX(x)
 				im.setY(y)
-				p[2] = False
+				p.valid = False
 				placed = True
 				curWidth = max(curWidth, im.getX() + im.getWidth())
-				pointsToCheck.append([im.getX(), im.getY() + im.getHeight(), True])
+				newPoint = Point(im.getX(), im.getY() + im.getHeight())
+				if ( not(newPoint in pointsToCheck) ):
+					pointsToCheck.append(newPoint)
 				break # break is important as the exactly above line adds more points so we get into an infinite loop
 			elif (stillValid and (x + im.getWidth() < curWidth)):
 				im.setX(x)
 				im.setY(y)
-				p[2] = False
+				p.valid = False
 				placed = True
 				curHeight = max(curHeight, im.getY() + im.getHeight())
-				pointsToCheck.append([im.getX()+ im.getWidth(), im.getY(), True])
+				newPoint = Point(im.getX(), im.getY() + im.getHeight())
+				if ( not(newPoint in pointsToCheck) ):
+					pointsToCheck.append(newPoint)
 				break # break is important as the exactly above line adds more points so we get into an infinite loop
 
 
 		if placed == False:
 			im.setX(x_offset)
 			im.setY(y_offset)
-			pointsToCheck.append([im.getX(), im.getY() + im.getHeight(), True])
+			newPoint = Point(im.getX(), im.getY() + im.getHeight())
+			if (not (newPoint in pointsToCheck)):
+			    pointsToCheck.append(newPoint)
 			x_offset += im.getWidth()
 			curWidth += im.getWidth()
 
@@ -130,7 +150,7 @@ def export(images, newImage):
 	  f["frame"]["w"] = im.getWidth()
 	  f["frame"]["h"] = im.getHeight()
 	  framesJson.append(f)
-	
+
 	f = open("out.json", 'w')
 	f.write(json.dumps(framesJson, indent = 4))
 	f.close()
